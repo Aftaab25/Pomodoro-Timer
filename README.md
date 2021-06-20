@@ -1,2 +1,3 @@
 # Pomodoro-Timer
-A Pomodoro Timer for Unix Terminals.
+A Pomodoro Timer for Unix/Linux Terminals.  
+(Still under progress)
