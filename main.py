@@ -1,86 +1,80 @@
 # Importing Libraries
-from tkinter import *
+import tkinter as tk
+from tkinter import Tk
 from tkinter.filedialog import askopenfilename, asksaveasfilename
 from tkinter import font
+from PIL import Image, ImageTk
 import tkinter.messagebox as tmsg
 import time
 
+from playsound import playsound
 
-# the countdown function
-def countdown():
-    t_ = T.get(1.0, END)
-    t = int(t_)
-    while t:
-        mins, secs = divmod(t, 60)
-        timer = '{:02d}:{:02d}'.format(mins, secs)
-        # timer = timer_ 
-        # TODO: Change it to Label
-        tmsg.showinfo(timer)
+background_path = r'assets\spaceship_art_fiction.jpg'
+bg_music_path = r'assets\spiderman-meme-song.mp3'
+
+class Pomodoro:
+    def __init__(self, root):
+        self.root = root
+
+    def work_break(self, timer):
+        minutes, seconds = divmod(timer, 60)
+        self.min.set(f"{minutes:02d}")
+        self.sec.set(f"{seconds:02d}")
+        self.root.update()
         time.sleep(1)
-        t -= 1
-    tmsg.showwarning("Hey time to get up and take a break!")
+        
+    def work(self):
+        timer = 50*60
+        while timer >= 0:
+            pomo.work_break(timer)
+            if timer == 0:
+                playsound(background_path)
+                tmsg.showinfo("Break Time", "Take A Break, \n Click Break Button")
+            timer -= 1
 
+    def break_(self):
+        timer = 10*60
+        while timer >= 0:
+            pomo.work_break(timer)
+            if timer == 0:
+                playsound(background_path)
+                tmsg.showinfo("Time to work!", "Get Back to Work\n Click Work Button")
+            timer -= 1
 
-# input time (in seconds)
-# t = input("Enter the time in seconds: ")
+    def main(self):
+        # GUI window configuration
+        self.root.geometry("450x450")
+        self.root.resizable(False, False)
+        self.root.title("Pomodoro Timer")
 
-# countdown(int(t))
+        # Labels
+        self.min = tk.StringVar(self.root)
+        self.min.set("50")
+        self.sec = tk.StringVar(self.root)
+        self.sec.set("00")
+
+        self.min_label = tk.Label(self.root, textvariable=self.min, font=("arial", 22, "bold"), bg="red", fg='black')
+        self.min_label.pack()
+
+        self.sec_label = tk.Label(self.root, textvariable=self.sec, font=("arial", 22, "bold"), bg="black", fg='white')
+        self.sec_label.pack()
+
+        # add background image for GUI using Canvas widget
+        canvas = tk.Canvas(self.root)
+        canvas.pack(expand=True, fill="both")
+        img = Image.open(bg_music_path)
+        bg = ImageTk.PhotoImage(img)
+        canvas.create_image(0, 0, image=bg, anchor="nw")
+
+        # create three buttons with countdown function command
+        btn_work = tk.Button(self.root, text="Start", bd=5, command=self.work,
+                             bg="red", font=("arial", 15, "bold")).place(x=140, y=380)
+        btn_break = tk.Button(self.root, text="Break", bd=5, command=self.break_,
+                              bg="red", font=("arial", 15, "bold")).place(x=240, y=380)
+
+        self.root.mainloop()
 
 
 if __name__ == '__main__':
-    # root/window of the App
-    root = Tk()
-    root.title("POMODORO TIMER")
-    root.geometry("450x450")
-    
-    T = Text(root, height = 2, width = 10)
-    T.pack()
-
-    B = Button(root, text ="Hello", command = countdown)
-    B.pack()
-
-    # MenuBar
-    # mymenu = Menu(root) # Creating a menubar (Main Menu)
-    
-    # # ==========================================================================
-    # m1 = Menu(mymenu, tearoff=0) # tearoff = 0, as tearoff is not needed
-    # m1.add_command(label="New", command=newFile)    # Submenu under File Section to create a new file.
-    # m1.add_command(label="Open", command=openFile)  # Submenu under File Section to Open a file.
-    # m1.add_command(label="Save", command=saveFile)  # Submenu under File Section to Save (Save as) a new file.
-    # root.config(menu=mymenu)
-    # mymenu.add_cascade(label="File", menu=m1)
-    
-    # # ==========================================================================
-    # m2 = Menu(mymenu, tearoff=0) # tearoff = 0, as tearoff is not needed
-    # m2.add_command(label="Cut", command=cut)    # Submenu under File Section to create a new file.
-    # m2.add_command(label="Copy", command=copy)  # Submenu under File Section to Open a file.
-    # m2.add_command(label="Paste", command=paste)  # Submenu under File Section to Save (Save as) a new file.
-    # root.config(menu=mymenu)
-    # mymenu.add_cascade(label="Edit", menu=m2)
-    
-    # # ==========================================================================
-    # # The details can be shown using submenus for each category of intstructions
-    # m3 = Menu(mymenu, tearoff=0) # tearoff = 0, as tearoff is not needed
-    # m3.add_command(label="Brach Instructions", command=branchInstr)    # Submenu under File Section to create a new file.
-    # m3.add_command(label="Stack Operations", command=stackInstr)  # Submenu under File Section to Open a file.
-    # m3.add_command(label="Load & Store", command=loadStoreInstr)  # Submenu under File Section to Save (Save as) a new file.
-    # m3.add_command(label="MOV & Arithmetic", command=movArithmeticInstr)  # Submenu under File Section to Save (Save as) a new file.
-    # m3.add_command(label="Logical Instructions", command=logicalInstr)  # Submenu under File Section to Save (Save as) a new file.
-    # m3.add_command(label="Multiply Instructions", command=mulInstr)  # Submenu under File Section to Save (Save as) a new file.
-    # m3.add_command(label="Flag Instructions", command=flagInstr)  # Submenu under File Section to Save (Save as) a new file.
-    # root.config(menu=mymenu)
-    # mymenu.add_cascade(label="Instruction Set", menu=m3)
-    
-    # # Adding the remaining menus directly as they dont have any submenu
-    # mymenu.add_command(label="Assemble", command=assemble)
-    # mymenu.add_command(label="About", command=about)
-    # mymenu.add_command(label="Quit", command=quit)
-    # root.config(menu=mymenu)
-
-    # # Adding a scrollbar
-    # scroll = Scrollbar(textArea)
-    # scroll.pack(side=RIGHT, fill=Y)
-    # scroll.config(command=textArea.yview)
-    # textArea.config(yscrollcommand=scroll.set, relief="raised")
-
-    root.mainloop()
+    pomo = Pomodoro(tk.Tk())
+    pomo.main()
