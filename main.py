@@ -9,8 +9,8 @@ import time
 
 from playsound import playsound
 
-background_path = r'assets\spaceship_art_fiction.jpg'
-bg_music_path = r'assets\spiderman-meme-song.mp3'
+background_path = r'assets/spaceship_art_fiction.jpg'
+bg_music_path = r'assets/spiderman-meme-song.mp3'
 
 class Pomodoro:
     def __init__(self, root):
@@ -28,7 +28,7 @@ class Pomodoro:
         while timer >= 0:
             pomo.work_break(timer)
             if timer == 0:
-                playsound(background_path)
+                playsound(bg_music_path)
                 tmsg.showinfo("Break Time", "Take A Break, \n Click Break Button")
             timer -= 1
 
@@ -62,7 +62,7 @@ class Pomodoro:
         # add background image for GUI using Canvas widget
         canvas = tk.Canvas(self.root)
         canvas.pack(expand=True, fill="both")
-        img = Image.open(bg_music_path)
+        img = Image.open(background_path)
         bg = ImageTk.PhotoImage(img)
         canvas.create_image(0, 0, image=bg, anchor="nw")
 

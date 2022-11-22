@@ -1,0 +1,4 @@
+TODO:
+    - Add a reset button tp reset the timer
+    - Change/ Add sound
+    - Button UI
