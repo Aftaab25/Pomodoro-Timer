@@ -68,9 +68,9 @@ class Pomodoro:
 
         # create three buttons with countdown function command
         btn_work = tk.Button(self.root, text="Start", bd=5, command=self.work,
-                             bg="red", font=("arial", 15, "bold")).place(x=140, y=380)
+                             bg="red", font=("cascadia code", 15, "bold")).place(x=140, y=380)
         btn_break = tk.Button(self.root, text="Break", bd=5, command=self.break_,
-                              bg="red", font=("arial", 15, "bold")).place(x=240, y=380)
+                              bg="red", font=("cascadia code", 15, "bold")).place(x=240, y=380)
 
         self.root.mainloop()
 
