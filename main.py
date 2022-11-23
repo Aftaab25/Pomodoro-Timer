@@ -14,7 +14,9 @@ bg_music_path = r'assets/spiderman-meme-song.mp3'
 
 class Pomodoro:
     def __init__(self, root):
+        self.timer = 0
         self.root = root
+
 
     def work_break(self, timer):
         minutes, seconds = divmod(timer, 60)
@@ -24,22 +26,26 @@ class Pomodoro:
         time.sleep(1)
         
     def work(self):
-        timer = 50*60
-        while timer >= 0:
-            pomo.work_break(timer)
-            if timer == 0:
+        self.timer = 50*60
+        while self.timer >= 0:
+            pomo.work_break(self.timer)
+            if self.timer == 0:
                 playsound(bg_music_path)
                 tmsg.showinfo("Break Time", "Take A Break, \n Click Break Button")
-            timer -= 1
+            self.timer -= 1
 
     def break_(self):
-        timer = 10*60
-        while timer >= 0:
-            pomo.work_break(timer)
-            if timer == 0:
+        self.timer = 10*60
+        while self.timer >= 0:
+            pomo.work_break(self.timer)
+            if self.timer == 0:
                 playsound(background_path)
                 tmsg.showinfo("Time to work!", "Get Back to Work\n Click Work Button")
-            timer -= 1
+            self.timer -= 1
+
+    def close(self):
+        self.timer = -1
+        self.root.destroy()
 
     def main(self):
         # GUI window configuration
@@ -71,6 +77,8 @@ class Pomodoro:
                              bg="red", font=("cascadia code", 15, "bold")).place(x=140, y=380)
         btn_break = tk.Button(self.root, text="Break", bd=5, command=self.break_,
                               bg="red", font=("cascadia code", 15, "bold")).place(x=240, y=380)
+
+        self.root.protocol("WM_DELETE_WINDOW", self.close)
 
         self.root.mainloop()
 

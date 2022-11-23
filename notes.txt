@@ -5,4 +5,4 @@ TODO:
     - Set an option to set customised time
 
 Fixes:
-    - Fix crashing of app when closed after running the timer.
+    - Fix crashing of app when closed after running the timer. :: DONE
