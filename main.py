@@ -59,10 +59,10 @@ class Pomodoro:
         self.sec = tk.StringVar(self.root)
         self.sec.set("00")
 
-        self.min_label = tk.Label(self.root, textvariable=self.min, font=("arial", 22, "bold"), bg="red", fg='black')
+        self.min_label = tk.Label(self.root, textvariable=self.min, font=("Cascadia Code", 22, "bold"), bg="red", fg='black')
         self.min_label.pack()
 
-        self.sec_label = tk.Label(self.root, textvariable=self.sec, font=("arial", 22, "bold"), bg="black", fg='white')
+        self.sec_label = tk.Label(self.root, textvariable=self.sec, font=("JetBrains Mono", 22, "bold"), bg="black", fg='white')
         self.sec_label.pack()
 
         # add background image for GUI using Canvas widget
@@ -74,9 +74,9 @@ class Pomodoro:
 
         # create three buttons with countdown function command
         btn_work = tk.Button(self.root, text="Start", bd=5, command=self.work,
-                             bg="red", font=("cascadia code", 15, "bold")).place(x=140, y=380)
+                             bg="red", font=("JetBrains Mono", 15, "bold")).place(x=140, y=380)
         btn_break = tk.Button(self.root, text="Break", bd=5, command=self.break_,
-                              bg="red", font=("cascadia code", 15, "bold")).place(x=240, y=380)
+                              bg="red", font=("JetBrains Mono", 15, "bold")).place(x=240, y=380)
 
         self.root.protocol("WM_DELETE_WINDOW", self.close)
 
